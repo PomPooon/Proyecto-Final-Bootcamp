@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans
+	xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+	<http >
+		<intercept-url pattern="/crearcapacitacion*" access="hasRole('ADMIN')"  />
+		  
+                  <intercept-url pattern="/login" access="permitAll" />
+		 <form-login default-target-url="/" login-page="/login"  authentication-failure-forward-url="/denied" />
+		  <intercept-url pattern="/crearusuario" access="hasRole('ADMIN')" />
+		  <intercept-url pattern="/respondercheckList" access="hasRole('ADMIN')" />
+		  <intercept-url pattern="/crearpago" access="hasRole('ADMIN')" />
+		 <intercept-url pattern="/listarusuario" access="hasRole('ADMIN')" />
+        <csrf disabled="true"></csrf>
+		
+	</http>
+
+	
+
+
+
+
+	<authentication-manager>
+		<authentication-provider>
+                    
+			<user-service>
+				<user name="admin" password="{noop}1234"
+					authorities="ROLE_ADMIN" />
+				
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+</bean:beans> 
